@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+    }
+    .cart {
+      /* display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 20px; */
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .cart-item {
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-item img {
+      max-width: 100px;
+      margin-right: 20px;
+    }
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .cart-item-name {
+      font-size: 24px;
+      margin: 0 0 10px 0;
+    }
+    .cart-item-price {
+      font-size: 18px;
+      margin: 0;
+    }
+    .cart-totals {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .cart-total {
+      font-size: 24px;
+      margin: 0 20px 0 0;
+    }
+    .cart-discount {
+      font-size: 18px;
+      margin: 0;
+    }
+    .discount-amount {
+      font-size: 18px;
+      margin: 0 0 0 20px;
+    }
+    @media (min-width: 768px) {
+      .cart {
+        flex-wrap: nowrap;
+      }
+      .cart-item {
+        width: 50%;
+        margin-right: 20px;
+      }
+      .cart-item:nth-child(2n) {
+        margin-right: 0;
+      }
+      .cart-item img {
+        max-width: 150px;
+        margin-right: 40px;
+      }
+      .cart-item-name {
+        font-size: 36px;
+      }
+      .cart-item-price {
+        font-size: 24px;
+      }
+      .cart-total {
+        font-size: 36px;
+      }
+      .cart-discount {
+        font-size: 24px;
+      }
+      .discount-amount {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="cart"></div>
+    <div class="cart-totals">
+      <div class="cart-total"></div>
+      <div class="cart-discount"></div>
+      <div class="discount-amount"></div>
+    </div>
+  </div>
+
+    <script>const itemsList = document.querySelector('.items-list');
+        const price = document.querySelector('.price');
+        const discountAmount = document.querySelector('.discount-amount');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+
+        let cart = [
+            {
+                id: 1,
+                name: "Product 1",
+                price: 10,
+                image: "https://via.placeholder.com/150",
+                quantity: 2
+            },
+            {
+                id: 2,
+                name: "Product 2",
+                price: 15,
+                image: "https://via.placeholder.com/150",
+                quantity: 1
+            },
+            {
+                id: 3,
+                name: "Product 3",
+                price: 20,
+                image: "https://via.placeholder.com/150",
+                quantity: 3
+            }
+        ];
+
+
+        function addToCart(id, name, price, image) {
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id === id) {
+                    cart[i].quantity++;
+                    return;
+                }
+            }
+            cart.push({
+                id,
+                name,
+                price,
+                image,
+                quantity: 1
+            });
+        }
+            // Function to render the cart items
+    function renderCart() {
+      let cartItemsHtml = '';
+      let cartTotal = 0;
+      let cartDiscount = 0;
+
+      // Loop through each item in the cart array
+      cart.forEach(item => {
+        // Calculate the total price for the item
+        let itemTotal = item.price * item.quantity;
+
+        // Add the item total to the cart total
+        cartTotal += itemTotal;
+
+        // Generate the HTML for the cart item
+        cartItemsHtml += `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+              <h2 class="cart-item-name">${item.name}</h2>
+              <p class="cart-item-price">$${item.price.toFixed(2)} x ${item.quantity}</p>
+            </div>
+            <button class="remove-item" data-id="${item.id}">Remove</button>
+          </div>
+        `;
+      });
+
+      // Calculate the discount amount
+      cartDiscount = cartTotal * 0.15;
+
+      // Calculate the total amount after discount
+      let totalAfterDiscount = cartTotal - cartDiscount;
+
+      // Generate the HTML for the cart totals section
+      let cartTotalsHtml = `
+        <div class="cart-total">Total: $${cartTotal.toFixed(2)}</div>
+        <div class="cart-discount">Discount (15%):</div>
+        <div class="discount-amount">-$${cartDiscount.toFixed(2)}</div>
+        <div class="cart-total">Total After Discount: $${totalAfterDiscount.toFixed(2)}</div>
+      `;
+
+      // Render the cart items HTML and the cart totals HTML to the page
+      document.querySelector('.cart').innerHTML = cartItemsHtml;
+      document.querySelector('.cart-totals').innerHTML = cartTotalsHtml;
+
+      // Add event listeners to the remove buttons
+      const removeButtons = document.querySelectorAll('.remove-item');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', event => {
+          const id = event.target.dataset.id;
+          removeItemFromCart(id);
+        });
+      });
+    }
+
+    // Function to remove an item from the cart
+    function removeItemFromCart(id) {
+      // Find the index of the item with the given ID in the cart array
+      const index = cart.findIndex(item => item.id === Number(id));
+
+      // If the item is found, remove it from the cart array
+      if (index !== -1) {
+        cart.splice(index, 1);
+      }
+
+      // Render the updated cart
+      renderCart();
+    }
+
+    // Render the initial cart
+    renderCart();
+  </script>
+</body>
+</html>
