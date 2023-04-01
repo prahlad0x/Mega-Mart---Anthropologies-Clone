@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <style>
+     *{
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        nav {
+            height: 80px;
+            
+        }
+
+        .bottom_nav>a {
+            /* margin-right: 20px;
+            margin-left: 15px;
+            margin-top: 10px; */
+            text-decoration: none;
+            text-align: center;
+            color: rgb(49, 120, 164);
+        }
+        body{
+            padding: 0%;
+        }
+        .bottom_nav {
+            display: grid;
+            grid-template-columns: repeat(13,1fr);
+            border: 1px solid rgb(176, 175, 175);
+            align-items: center;
+            padding: 15px;
+        }
+
+        .top_nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* border: 1px solid rgb(176, 175, 175); */
+            padding: 4px;
+            /* border-bottom: none; */
+        }
+        .top_nav > div h1{
+            margin: 0 0 0 50px;
+        }
+    
+        .top_nav >div:last-child {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-right: 30px;
+        }
+        #cart{
+            width: 40px;
+        }
+        .top_nav > div:last-child input{
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .top_nav > div:last-child button{
+            padding: 8px 5px;
+            margin-right: 50px;
+        }
+        footer div {
+            border-top: 1px solid gainsboro;
+            width: 100%;
+        }
+        footer img{
+            width: 100%;
+        }
+        #footer2{
+            display: none;
+        }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="top_nav">
+        <div><h1>Mega Mart
+
+        </h1></div>
+        <div><input type="search" placeholder="Search">
+        <button>Search</button>
+        <div>
+
+            <img  id="cart" src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png" alt="cart">
+        </div>
+    </div>
+    </div>
+    <div class="bottom_nav">
+        <a href="#">New!</a>
+        <a href="#">Top-Rated</a>
+        <a href="#">Furniture</a>
+        <a href="#">Décor</a>
+        <a href="#">Kitchen & Dining</a>
+        <a href="#">Shoes</a>
+        <a href="#">Bedding</a>
+        <a href="#">Bath</a>
+        <a href="#">Outdoor</a>
+        <a href="#">Stationery</a>
+        <a href="#">Kids</a>
+        <a href="#">Gifts</a>
+        <a href="#">Sale</a>
+    </div>
+</nav>
+<div class="MainCont"></div>
+<footer>
+  <div>
+      <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png" alt="./picters/Screenshot 2023-04-01 083656.png">
+      <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png" alt="./picters/Screenshot 2023-03-31 211025.png">
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Mart</title>
+    <style>
+        .mainCont{
+            width: 80%;
+            margin: auto;
+        }
+        *{
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        nav {
+            height: 80px;
+            
+        }
+
+        .bottom_nav>a {
+            /* margin-right: 20px;
+            margin-left: 15px;
+            margin-top: 10px; */
+            text-decoration: none;
+            text-align: center;
+            color: rgb(49, 120, 164);
+        }
+        body{
+            padding: 0%;
+        }
+        .bottom_nav {
+            display: grid;
+            grid-template-columns: repeat(13,1fr);
+            border: 1px solid rgb(176, 175, 175);
+            align-items: center;
+            padding: 15px;
+        }
+
+        .top_nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* border: 1px solid rgb(176, 175, 175); */
+            padding: 4px;
+            /* border-bottom: none; */
+        }
+        .top_nav > div h1{
+            margin: 0 0 0 50px;
+        }
+    
+        .top_nav >div:last-child {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-right: 30px;
+        }
+        #cart{
+            width: 40px;
+        }
+        .top_nav > div:last-child input{
+            padding: 8px;
+            margin-right: 10px;
+        }
+        .top_nav > div:last-child button{
+            padding: 8px 5px;
+            margin-right: 50px;
+        }
+        .divs{
+            display: flex;
+            margin-top: 60px;
+        }
+        /* .divs div{
+            width:fit-content;
+        } */
+        .one{
+            margin-top: 40px;
+            grid-template-columns: 70%,30%;
+            gap: 10px;
+        }
+        /* .one > div {
+            border:2px solid black; 
+        }*/
+        .one_1 img{
+            width: 100%;
+        }
+        .one_2 img{
+            width: auto;
+        }
+        .three{
+            grid-template-columns: 70%,30%;
+            gap: 20px;
+        }
+        .three img {
+            width: 100%;  
+        }
+        .four{
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+        .four img {
+            width: 100%;  
+        }
+        .five {
+            grid-template-columns: repeat(1,1fr);
+        }
+        .five img{
+           width: 100%;
+        }
+        .two{
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        .two > div > img{
+            width: 100%;
+        }
+
+        .six{
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+            font-size: medium;
+            margin-top: 100px;
+        }
+        .six > div > img {
+            width: 100%;
+        }
+        .six > div > h2{
+            font-weight: 100;
+        }
+        .six > div > p{
+            font: 1.3rem/1.8 var(--font-body-small);
+            letter-spacing: .06rem;
+            margin-bottom: 20px;
+        }
+        .seven{
+            margin-top: 100px;
+            gap: 10px;
+            grid-template-columns: repeat(5,1fr);
+        }
+        .seven > div >p{
+            color: inherit;
+            font: 1.3rem/1.5 var(--font-body-bold);
+            letter-spacing: .06rem;
+            margin-bottom: 0;
+            font-weight: 100;
+            font-size: medium;
+        }
+        .seven img{
+            width: 100%;
+        }
+        .eigth{
+            margin-top: 100px;
+            gap: 10px;
+            grid-template-columns: repeat(5,1fr);
+        }
+        .eigth > div >p{
+            color: inherit;
+            font: 1.3rem/1.5 var(--font-body-bold);
+            letter-spacing: .06rem;
+            margin-bottom: 0;
+            font-weight: 100;
+            font-size: medium;
+        }
+        .eigth img{
+            width: 100%;
+        }
+        .nine{
+            margin-top: 100px;
+            gap: 20px;
+            grid-template-columns: repeat(3,1fr);
+        }
+        .nine > div >p{
+            color: inherit;
+            font: 1.3rem/1.5 var(--font-body-bold);
+            letter-spacing: .06rem;
+            font-weight: 100;
+            font-size: small;
+        }
+        .nine img{
+            width: 100%;
+        }
+        .nine h2{
+            font-weight: 100;
+        }
+        .centerbtn{
+            padding: 10px 20px;
+            color: #26262C;
+            background-color: #FDFDF9;
+            cursor: pointer;
+            display:block;
+            margin: auto;
+            margin-top: -60px;
+            z-index: 45555;
+            position: relative;
+            border: none;            
+        }
+        footer div {
+            border-top: 1px solid gainsboro;
+            width: 100%;
+        }
+        footer img{
+            width: 100%;
+        }
+        #footer2{
+            display: none;
+        }
+        .headings{
+            margin-top: 50px;
+            margin-bottom: -70px;
+            border-bottom: 0.4px solid rgb(184, 180, 180);
+        }
+        .headings h3{
+            margin-bottom: 15px;
+            font-weight: 100;
+        }
+        .middle_heading h3{
+            text-align: center;
+        }
+        .info{
+            border-top:1px solid #a4a4a8;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            /* border-bottom: 1px solid grey; */
+            padding-bottom: 20px;
+        }
+        .info > h2{
+            font-weight: 100;
+            margin: 30px 0 20px 0;
+        }
+        .info h4{
+            /* font-size: small; */
+            font-weight: 200;
+        }
+        a{
+            color: rgb(59, 102, 112);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="top_nav">
+            <div><h1>Mega Mart
+
+            </h1></div>
+            <div><input type="search" placeholder="Search">
+            <button>Search</button>
+            <div>
+
+                <img  id="cart" src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png" alt="cart">
+            </div>
+        </div>
+        </div>
+        <div class="bottom_nav">
+            <a href="#">New!</a>
+            <a href="#">Top-Rated</a>
+            <a href="#">Furniture</a>
+            <a href="#">Décor</a>
+            <a href="#">Kitchen & Dining</a>
+            <a href="#">Shoes</a>
+            <a href="#">Bedding</a>
+            <a href="#">Bath</a>
+            <a href="#">Outdoor</a>
+            <a href="#">Stationery</a>
+            <a href="#">Kids</a>
+            <a href="#">Gifts</a>
+            <a href="#">Sale</a>
+        </div>
+    </nav>
+    <div class="mainCont ">
+        <div class="one divs">
+            <div class="one_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/2qNPYihpSMixD9hklRMIOH/952d55b8268d66373b3bc3333b733c0b/LS_M1a-1-2.jpg?w=1784&q=80&fm=webp"
+                    alt="Product Image">
+                <button class="centerbtn">the Reformation Shop</button>
+            </div>
+            <div class="one_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/7qi0oKfnqUGDqWtXby6cva/876293b82a386f8bdbf49e4e1aa28100/484733007-hpg_m1-b.gif?w=428&q=80&fm=webp"
+                    alt="Image">
+            </div>
+        </div>
+        <div class="two divs">
+            <div class="two_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/3oxEDi87p07u8PDBRUWZQT/799ee882cf52081f2d78dd8d9f4dcc62/484733075-ls_m2a.jpg?w=660&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop dresses</button>
+            </div>
+            <div class="two_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/7FFfT0oq4tbFutP6p7u4YZ/71fb0faac0ef301451d157e0b035f8a0/484733081-ls_m2b.jpg?w=660&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop new clothing</button>
+            </div>
+            <div class="two_3">
+                <img src="https://images.ctfassets.net/5de70he6op10/55I6Ziwm1BLgmFHzuRJi9U/d5afd53ea4e04c32444f7e6994de3a26/484733090-ls_m2c.jpg?w=660&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop jewellery</button>
+            </div>
+            <div class="two_4">
+                <img src="https://images.ctfassets.net/5de70he6op10/6m0is55tRAh4uMrxrsZwyb/5d42159121116c07584fca7d41dc5ac2/484733095-ls_m2d.jpg?w=660&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop Reformation</button>
+            </div>
+        </div>
+        <div class="three divs">
+            <div class="three_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/1V3Atq484hyeMWCw1MVXas/12f900820a162ba443ed50c4fdfd42d3/484733140-ls_m3a.jpg?w=1756&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">the Reformation Shop</button>
+            </div>
+            <div class="three_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/3rKgQlzbypafdDTvNckO2q/193350ddf772ecfdc9c89ee5879ff993/484733144-ls_m3b.jpg?w=856&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop weddings</button>
+            </div>
+        </div>
+        <div class="four divs">
+            <div class="four_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/7cxMotLF5i9rrL92ndmypR/88e8ae5aa03038acc259dd104a9d2963/484733176-ls_m4a.jpg?w=1302&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">Mother's Day Gifts</button>
+            </div>
+            <div class="four_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/716Ut6ZHZcpObdM9yRjLX8/ceb76d3813b83c516a7773b4749d9dcd/484733181-ls_m4b.jpg?w=1302&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop bedding</button>
+            </div>
+        </div>
+        <div class="five divs">
+            <div class="five_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/2XUxhNlu24HaHTFRAghRS3/f30d5364574fc72b718e910f087b2685/484733194-ls_m5a.jpg?w=2640&q=80&fm=webp"
+                    alt="Image">
+                <button class="centerbtn">shop new clothing</button>
+            </div>
+        </div>
+        <div class="headings">
+            <h3>Top-Rated Picks</h3>
+        </div>
+        <div class="six divs">
+            <div class="six_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/3yNbvWqQXailKck2nLnaJP/7f1d29590bd5779c37c6dc495cc56daa/484733228-ls_customerfave_a.jpg?w=630&q=80&fm=webp"
+                    alt="Image">
+                <p>CUSTOMER FAVORITE</p>
+                <h2>The Bettina Tiered Shirt Dress</h2>
+                <p>★★★★★</p>
+                <p>This dress is simply gorgeous - the fabric is exquisite.</p>
+                <a href="">shop now</a>
+            </div>
+            <div class="six_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/1wvoOBYHC9zcXpOFI0rASL/c19a5326e17d028f98f7e694fe9442bb/484733230-ls_customerfave_b.jpg?w=630&q=80&fm=webp"
+                    alt="Image">
+                <p>CUSTOMER FAVORITE</p>
+                <h2>The Viviette Lace Bralette</h2>
+                <p>★★★★★</p>
+                <p>This bralette is beautiful...Feminine and edgy and comfortable!</p>
+                <a href="">shop now</a>
+            </div>
+            <div class="six_3">
+                <img src="https://images.ctfassets.net/5de70he6op10/4Y5h33Z2DMlhmcDTZ85yQ9/4a829347d2391f0649abf40b5ab31d65/484733234-ls_customerfave_c.jpg?w=630&q=80&fm=webp"
+                    alt="Image">
+                <p>CUSTOMER FAVORITE</p>
+                <h2>The Guilhermina Ballet Mules</h2>
+                <p>★★★★★</p>
+                <p>Stunning...I absolutely LOVE this shoe!</p>
+                <a href="">shop now</a>
+            </div>
+            <div class="six_4">
+                <img src="https://images.ctfassets.net/5de70he6op10/7h8K0HHlG7VatvoyzVnMXB/7198c5548ea54f0747bf1cdf9bc6db00/484733237-ls_customerfave_d.jpg?w=630&q=80&fm=webp"
+                    alt="Image">
+                <p>CUSTOMER FAVORITE</p>
+                <h2>The Maeve Cropped Racerback Tank</h2>
+                <p>★★★★★</p>
+                <p>Perfect...bought this in as many colors as possible!</p>
+                <a href="">shop now</a>
+            </div>
+        </div>
+        <div class="headings">
+            <h3>You May Also Like</h3>
+        </div>
+        <div class="seven divs">
+            <div class="seven_1">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/4130084320091_049_b2?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Maeve Drop-Waist Dress</p>
+            </div>
+            
+            <div class="seven_2">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/4130675950019_013_b?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>The Colette Cropped Wide-Leg Pants</p>
+            </div>
+            <div class="seven_3">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/78879616_000_b2?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Garden Bunny Dish Towel</p>
+            </div>
+            <div class="seven_4">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/80254766_046_b?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Ellen Merchant Melamine Tumbler</p>
+            </div>
+            <div class="seven_5">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/48436679_066_b10?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Nostalgia Eau De Parfum</p>
+            </div>
+        </div>
+        <div class="headings">
+            <h3> Top-Rated</h3>
+        </div>
+        <div class="eigth divs">
+            <div class="eigth_1">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/78988185_010_b10?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Capri Blue Sandstone Glass Jar Candle</p>
+            </div>
+            <div class="eigth_2">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/4123650590131_001_b?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>he Colette Cropped Wide-Leg Pants</p>
+            </div>
+            <div class="eigth_3">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/58028085_001_b2?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Capri Blue Volcano Matte Black Jar Candle</p>
+            </div>
+            <div class="eigth_4">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/76124932_266_b?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>Capri Blue Volcano Matte Black Jar Candle</p>
+            </div>
+            <div class="eigth_5">
+                <img src="https://images.urbndata.com/is/image/Anthropologie/4112916210065_011_b2?$an-category$&qlt=80&fit=constrain"
+                    alt="Image">
+                <p>By Anthropologie Babydoll Top</p>
+            </div>
+        </div>
+        <div class="headings middle_heading">
+            <h3>Explore More</h3>
+        </div>
+        <div class="nine divs">
+            <div class="nine_1">
+                <img src="https://images.ctfassets.net/5de70he6op10/U2fCd9Ep6otJYrxWA6a0t/2a236b9ea21b5785d7e98cee0f11871e/MTE_1.jpg?w=856&q=80&fm=webp"
+                    alt="Image">
+                <h2>New Chapter, Fresh Paige</h2>
+                <p>Turn to the experts in flattering fits and flawlessly tailored pairs to start spring on the right
+                    note.</p>
+                <a href="">shop Paige jeans</a>
+            </div>
+            
+            <div class="nine_2">
+                <img src="https://images.ctfassets.net/5de70he6op10/25UKbR1vHJpq6yriubNoSD/c1e9f1ba93a96c9b3d7ac869951de29c/MTE_2.jpg?w=856&q=80&fm=webp"
+                alt="Image">
+                <h2>International Women's Day</h2>
+                <p>We're proud to support women-owned brands each and every day.</p>
+                <a href="">discover new favorites</a>
+            </div>
+            <div class="nine_3">
+                <img src="https://images.ctfassets.net/5de70he6op10/4oNoIgRJVULLXu6o02FnFA/79760e323b6140b7fc68bb50638c8079/032023_HPG_MTE_3.jpg?w=856&q=80&fm=webp"
+                    alt="Image">
+                <h2>International Women's Day</h2>
+                <p>We're proud to support women-owned brands each and every day.</p>
+                <a href="">discover new favorites</a>
+            </div>
+
+        </div>
+        <div class="info">
+            <h2>About Us</h2>
+            <h4>Our mission at Anthropologie has always been to surprise and delight you with unexpected, distinctive
+                finds for your closet and home. We source and craft all of our products with care, ensuring that any
+                treasure you find at Anthropologie is unique, just like you. Explore our dresses shop to find styles and
+                fits perfect for any occasion, from cocktail party dresses to wedding guest dresses to casual...</h4>
+            <a href="">Read More</a>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png" alt="./picters/Screenshot 2023-04-01 083656.png">
+            <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png" alt="./picters/Screenshot 2023-03-31 211025.png">
+        </div>
+    </footer>
+</body>
+
+</html>
