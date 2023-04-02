@@ -113,6 +113,7 @@
 
         #home {
             cursor: pointer;
+            color: rgb(15, 150, 132);
         }
         #username {
             font-size: larger;
@@ -120,6 +121,29 @@
             color: rgb(79, 120, 120);
             text-decoration: underline;
             cursor: pointer;
+        }
+        #productCont{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap:60px 20px;
+        }
+        #card :hover{
+            cursor: pointer;
+            text-decoration: underline;
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
+        #card  img{
+            width: 100%;
+        }
+        #card{
+            color: rgb(116, 81, 149);
+            padding: 2px;
+            text-align: center;
+        }
+        @media (max-width:1000px){
+            #productCont {
+                grid-template-columns: repeat(2,1fr);
+            }
         }
     </style>
 </head>
@@ -164,7 +188,7 @@
         <div>
             <h4 id="type">Clothing /<span id="headingvalue"></span></h4>
             <div><label for="">Sort : </label>
-                <select name="" id="">
+                <select  id="select">
                     <option value="">Featured</option>
                     <option value="lth">Price : Low To High</option>
                     <option value="htl">Price : High To Low</option>
@@ -173,7 +197,7 @@
                 </select>
             </div>
         </div>
-        <div id="productCot">
+        <div id="productCont">
 
         </div>
     </div>
@@ -189,12 +213,18 @@
     
 </body>
 <script >
+    const url = 'https://clear-slug-stockings.cyclic.app'
+    let Products = [];
+    let sortingArr = [];
+
     let headingvalue = document.getElementById('headingvalue')
     headingvalue.innerText = localStorage.getItem('searchvalue')
 
+    let select = document.getElementById('select')
+    let container = document.querySelector('#productCont')
     let cartbtn = document.getElementById('cart')
     let home = document.getElementById('home')
-   let anchors = document.querySelectorAll('.dresses')
+    let anchors = document.querySelectorAll('.dresses')
     let anchor2 = document.querySelector('.shoes')
     let anchor3 = document.querySelector('.top-rated')
     let searchbtn = document.querySelector('#searchbtn')
@@ -209,9 +239,14 @@
         }
     })
 
-
     searchbtn.addEventListener('click', ()=>{
-        alert('df;dsf')
+        let searchbar = document.querySelector('input[type=search]')     
+        let searched = Products.filter(ele => {
+             return ele.title.toLowerCase().includes(searchbar.value.toLowerCase())
+        })  
+
+        setHtml(searched)
+        sortingArr = searched
     })
 
     home.addEventListener('click', ()=>{
@@ -234,22 +269,89 @@
         location.href = 'product.html'
     })
 
-
     cartbtn.addEventListener('click',()=>{
-        location.href = 'cart.html'
+        if (username.textContent !== "Login/Register") {
+            location.href = 'cart.html'
+        } else {
+            location.href = 'logReg.html'
+        }
     })
 
+    select.addEventListener('change',()=>{
+        if(select.value == 'lth'){
+            sortingArr = sortingArr.sort((a,b)=> a.price - b.price)
+        }
+        else if(select.value == 'htl'){
+            sortingArr = sortingArr.sort((a,b)=> b.price - a.price)
+        }
+        else if(select.value === "az"){
+            sortingArr = sortingArr.sort((a,b)=> (a.title > b.title)? 1 : (a.title < b.title)?  -1 :0 )
+        }
+        else if(select.value === "za"){
+            sortingArr = sortingArr.sort((a,b)=> (a.title > b.title)? -1 : (a.title < b.title)?  1 :0 )
+        }
+        setHtml(sortingArr)
+    })
 
+    function setHtml(arr){
+        let html =  `${arr.map(ele=> getcard(ele)).join('')}`
+        container.innerHTML = html
+        addEvent()
+    }
+    
+    function getProducts(){
+        fetch(`${url}/products/`)
+        .then(res=>res.json())
+        .then(res =>{
+            let value = localStorage.getItem('searchvalue')
+            let searchbarvalue = localStorage.getItem('searchbarvalue')
+
+            Products = res.products
+            if(searchbarvalue == "" && value == ""){
+                setHtml(Products)
+                sortingArr = products
+            }
+            else if(searchbarvalue != ""){
+                arr = Products.filter(ele =>ele.title.toLowerCase().includes(searchbarvalue))
+                if(arr.length == 0) {
+                    container.innerText = "No such product availabel !"
+                }
+                else setHtml(arr)
+                sortingArr = arr
+                localStorage.setItem('searchbarvalue', '')
+            } 
+            else{
+                arr = Products.filter(ele=>ele.type == value)
+                setHtml(arr)
+                sortingArr = arr
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    function addEvent(){
+        let cards = document.querySelectorAll('#card')
+            for(let card of cards){
+                card.addEventListener('click',(e)=>{
+                    localStorage.setItem('detailProductId', e.target.dataset.id)
+                    location.href = 'detail.html'
+                })
+            }
+    }
     
     function getcard(item){
-        let card = `<div data-id="${item.id}">
-            <img src="${item.image}" alt=" Product Image">
-            <p>${item.title}</p>
-            <span>${item.price}</span>
+        let card = `<div id="card" data-id="${item._id}">
+            <img src="${item.image}" data-id="${item._id}" alt="Product Image">
+            <p data-id="${item._id}">${item.title} </p>
+            <span data-id="${item._id} ">$ ${item.price}.00</span>
         </div>`
+
         return card
     }
-</script>
-<script src="product.js"></script>
 
+    window.addEventListener('load', ()=>{
+        getProducts()
+    })
+
+</script>
 </html>

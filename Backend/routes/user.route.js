@@ -51,6 +51,14 @@ userRouter.post('/login',async (req,res)=>{
     }
 })
 
+userRouter.get('/:id',async(req,res)=>{
+    try {
+        const user =await UserModel.findOne({_id : req.params.id})
+        res.status(200).send({msg: "userDetails",user:user})
+    } catch (error) {
+        res.status(400).send({msg: "User does not exists"})
+    }
+})
 
 userRouter.patch('/updatecart/:id',async(req,res)=>{
     try {

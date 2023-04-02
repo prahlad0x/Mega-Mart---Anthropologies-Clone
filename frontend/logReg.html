@@ -1,96 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/Register</title>
     <style>
-        *{
+        * {
             box-sizing: border-box;
             font-family: Verdana, sans-serif;
         }
-        input:focus{
+
+        input:focus {
             background-color: rgb(62, 64, 64);
             border: 1px solid #e0d850;
             background-color: #e8e8e8;
-            
+
             outline: 0;
             color: rgb(98, 96, 96);
         }
-        input{
+
+        input {
             border-radius: 10px;
-            font-size: larger ;
+            font-size: larger;
             padding: 10px;
             border: 1px solid #4c4905;
         }
 
-        input[type='number']::-webkit-inner-spin-button{
+        input[type='number']::-webkit-inner-spin-button {
             -webkit-appearance: none;
         }
-        .register p,.login p{
-            cursor:default;
+
+        .register p,
+        .login p {
+            cursor: default;
             font-size: large;
-            margin:30px 10px 10px 0;
+            margin: 30px 10px 10px 0;
         }
-        
-        input[type='submit']{
+
+        input[type='submit'] {
             border-radius: 7px;
             margin: 40px 10px 30px 10px;
             border: 1px solid yellow;
             background-color: #f9f26c;
         }
-        input[type='submit']:hover{
+
+        input[type='submit']:hover {
             background-color: #f1df1c;
             cursor: pointer;
             color: whitesmoke;
         }
-        form{
+
+        form {
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
             width: 600px;
             margin: auto;
             padding: 20px;
             background-color: white;
             display: grid;
-            grid-template-columns: repeat(1,1fr);
+            grid-template-columns: repeat(1, 1fr);
             object-fit: cover;
         }
-        .lr{
+
+        .lr {
             color: rgb(51, 167, 229);
             cursor: pointer;
         }
-        
-        .login,.register{
+
+        .login,
+        .register {
             height: 100vh;
             display: grid;
             justify-content: center;
             align-items: center;
-            grid-template-columns: repeat(1,1fr);
+            grid-template-columns: repeat(1, 1fr);
             /* background: linear-gradient(120deg,#2980b9, #8e44ad); */
         }
-        .register{
+
+        .register {
             display: none;
         }
-        
-        @media (max-width: 600px){
-            form{
-                width:100%;
+
+        @media (max-width: 600px) {
+            form {
+                width: 100%;
             }
-           .register p, .login p{
+
+            .register p,
+            .login p {
                 font-size: 14px;
             }
-            input{
+
+            input {
                 font-size: 16px;
             }
-            
+
         }
-        @media (max-width: 300px){
-            form{
+
+        @media (max-width: 300px) {
+            form {
                 padding: 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="register">
         <form action="#">
@@ -110,9 +125,9 @@
             <input type="password" id="registerPass2" placeholder="Confrim Password" required>
             <input type="submit" value="REGISTER" id="registerBtn">
             <div>
-               <p>
-                Already have an accound ? <span onclick="switchLogin()" class="lr">Login</span>
-               </p> 
+                <p>
+                    Already have an accound ? <span onclick="switchLogin()" class="lr">Login</span>
+                </p>
             </div>
         </form>
     </div>
@@ -125,7 +140,7 @@
             <p>forgot password ?</p>
             <input type='submit' value="LOGIN" id="loginBtn">
             <div>
-               <p>Don't have an accout? <span onclick="switchRegister()" class="lr">Register</span></p>
+                <p>Don't have an accout? <span onclick="switchRegister()" class="lr">Register</span></p>
             </div>
         </form>
     </div>
@@ -150,42 +165,48 @@
 
     // getting forms
     let login = document.querySelector('.login form')
-    let register= document.querySelector('.register form')
+    let register = document.querySelector('.register form')
 
-    function switchLogin(){
-        loginPage.style.display='grid' 
-        RegisterPage.style.display='none'
+    function switchLogin() {
+        loginPage.style.display = 'grid'
+        RegisterPage.style.display = 'none'
     }
-    function switchRegister(){
-        loginPage.style.display='none' 
-        RegisterPage.style.display='grid'
+    function switchRegister() {
+        loginPage.style.display = 'none'
+        RegisterPage.style.display = 'grid'
     }
 
 
-    
-    const url = `http://localhost:8080/users`
+
+    const url = `https://clear-slug-stockings.cyclic.app/users`
 
     login.addEventListener("submit", (e) => {
         e.preventDefault();
+
         let userObj = {
             email: loginEmailInp.value,
             password: loginPassInp.value,
         };
-        fetch(`${url}/login`, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(userObj),
-        })
-        .then((res) => res.json())
-        .then((res) => {
-            localStorage.setItem("userToken", res.token);
-            localStorage.setItem("username", res.user.username);
-            showNotification(res.msg);
-            window.location.href ='index.html'
-        })
-        .catch((err) => showNotification("Wrong Credientials"));
+        if (userObj.email == "admin@123" && userObj.password == "admin") {
+            location.href = 'admin.html'
+        } else {
+            fetch(`${url}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(userObj),
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    localStorage.setItem("userToken", res.token);
+                    localStorage.setItem("username", res.user.username);
+                    localStorage.setItem("userId", res.user._id);
+                    showNotification(res.msg);
+                    window.location.href = 'index.html'
+                })
+                .catch((err) => showNotification("Wrong Credientials"));
+        }
     })
 
     register.addEventListener("submit", (e) => {
@@ -219,21 +240,22 @@
                 },
                 body: JSON.stringify(userObj),
             })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res)
-                showNotification(res.msg);
-                localStorage.setItem('username', username)
-                switchLogin();
-            })
-            .catch((err) => console.log(err));
+                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res)
+                    showNotification(res.msg);
+                    localStorage.setItem('username', username)
+                    switchLogin();
+                })
+                .catch((err) => console.log(err));
         }
     });
 
-    function showNotification(message){
+    function showNotification(message) {
         alert(message)
     }
 
 
 </script>
+
 </html>

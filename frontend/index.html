@@ -8,7 +8,7 @@
     <title>Mega Mart</title>
     <style>
         .mainCont {
-            width: 80%;
+            width: 75%;
             margin: auto;
         }
 
@@ -40,7 +40,8 @@
             grid-template-columns: repeat(13, 1fr);
             border: 1px solid rgb(176, 175, 175);
             align-items: center;
-            padding: 15px;
+            padding: 15px 50px;
+            
         }
 
         .top_nav {
@@ -87,7 +88,7 @@
             width:fit-content;
         } */
         .one {
-            margin-top: 40px;
+            margin-top: 80px;
             grid-template-columns: 70%, 30%;
             gap: 10px;
         }
@@ -286,6 +287,7 @@
 
         #home {
             cursor: pointer;
+            color: rgb(15, 150, 132);
         }
 
         #username {
@@ -569,8 +571,13 @@
     })
 
     cartbtn.addEventListener('click', () => {
-        location.href = 'cart.html'
+        if (username.textContent !== "Login/Register") {
+            location.href = 'cart.html'
+        } else {
+            location.href = 'logReg.html'
+        }
     })
+
     for (let btn of centerbtn) {
         btn.addEventListener('click', () => {
             localStorage.setItem('searchvalue', 'dresses')
@@ -579,13 +586,14 @@
     }
 
     searchbtn.addEventListener('click', () => {
-        localStorage.setItem('searchvalue', searchbar.value.toLowerCase())
+        localStorage.setItem('searchbarvalue', searchbar.value.toLowerCase())
         location.href = 'product.html'
     })
 
     home.addEventListener('click', () => {
         location.href = 'index.html'
     })
+
     anchor2.addEventListener('click', () => {
         localStorage.setItem('searchvalue', 'shoes')
         location.href = 'product.html'
@@ -597,11 +605,11 @@
             location.href = 'product.html'
         })
     }
+    
     anchor3.addEventListener('click', () => {
         localStorage.setItem('searchvalue', 'top-rated')
         location.href = 'product.html'
     })
-
 </script>
 
 </html>
