@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mega Mart</title>
     <style>
-        .mainCont{
+        .mainCont {
             width: 80%;
             margin: auto;
         }
-        *{
+
+        * {
             box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         nav {
             height: 80px;
-            
+
         }
 
         .bottom_nav>a {
@@ -28,12 +30,14 @@
             text-align: center;
             color: rgb(49, 120, 164);
         }
-        body{
+
+        body {
             padding: 0%;
         }
+
         .bottom_nav {
             display: grid;
-            grid-template-columns: repeat(13,1fr);
+            grid-template-columns: repeat(13, 1fr);
             border: 1px solid rgb(176, 175, 175);
             align-items: center;
             padding: 15px;
@@ -47,99 +51,123 @@
             padding: 4px;
             /* border-bottom: none; */
         }
-        .top_nav > div h1{
+
+        .top_nav>div h1 {
             margin: 0 0 0 50px;
         }
-    
-        .top_nav >div:last-child {
+
+        .top_nav>div:last-child {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             margin-right: 30px;
         }
-        #cart{
+
+        #cart {
             width: 40px;
+            cursor: pointer;
         }
-        .top_nav > div:last-child input{
+
+        .top_nav>div:last-child input {
             padding: 8px;
             margin-right: 10px;
         }
-        .top_nav > div:last-child button{
+
+        .top_nav>div:last-child button {
             padding: 8px 5px;
             margin-right: 50px;
         }
-        .divs{
+
+        .divs {
             display: flex;
             margin-top: 60px;
         }
+
         /* .divs div{
             width:fit-content;
         } */
-        .one{
+        .one {
             margin-top: 40px;
-            grid-template-columns: 70%,30%;
+            grid-template-columns: 70%, 30%;
             gap: 10px;
         }
+
         /* .one > div {
             border:2px solid black; 
         }*/
-        .one_1 img{
-            width: 100%;
-        }
-        .one_2 img{
-            width: auto;
-        }
-        .three{
-            grid-template-columns: 70%,30%;
-            gap: 20px;
-        }
-        .three img {
-            width: 100%;  
-        }
-        .four{
-            grid-template-columns: repeat(2,1fr);
-            gap: 20px;
-        }
-        .four img {
-            width: 100%;  
-        }
-        .five {
-            grid-template-columns: repeat(1,1fr);
-        }
-        .five img{
-           width: 100%;
-        }
-        .two{
-            grid-template-columns: repeat(4,1fr);
-            gap: 20px;
-        }
-        .two > div > img{
+        .one_1 img {
             width: 100%;
         }
 
-        .six{
-            grid-template-columns: repeat(4,1fr);
+        .one_2 {
+            background: url("https://images.ctfassets.net/5de70he6op10/7qi0oKfnqUGDqWtXby6cva/876293b82a386f8bdbf49e4e1aa28100/484733007-hpg_m1-b.gif?w=428&q=80&fm=webp");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .three {
+            grid-template-columns: 70%, 30%;
+            gap: 20px;
+        }
+
+        .three img {
+            width: 100%;
+        }
+
+        .four {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .four img {
+            width: 100%;
+        }
+
+        .five {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .five img {
+            width: 100%;
+        }
+
+        .two {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .two>div>img {
+            width: 100%;
+        }
+
+        .six {
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             font-size: medium;
             margin-top: 100px;
         }
-        .six > div > img {
+
+        .six>div>img {
             width: 100%;
         }
-        .six > div > h2{
+
+        .six>div>h2 {
             font-weight: 100;
         }
-        .six > div > p{
+
+        .six>div>p {
             font: 1.3rem/1.8 var(--font-body-small);
             letter-spacing: .06rem;
             margin-bottom: 20px;
         }
-        .seven{
+
+        .seven {
             margin-top: 100px;
             gap: 10px;
-            grid-template-columns: repeat(5,1fr);
+            grid-template-columns: repeat(5, 1fr);
         }
-        .seven > div >p{
+
+        .seven>div>p {
             color: inherit;
             font: 1.3rem/1.5 var(--font-body-bold);
             letter-spacing: .06rem;
@@ -147,15 +175,18 @@
             font-weight: 100;
             font-size: medium;
         }
-        .seven img{
+
+        .seven img {
             width: 100%;
         }
-        .eigth{
+
+        .eigth {
             margin-top: 100px;
             gap: 10px;
-            grid-template-columns: repeat(5,1fr);
+            grid-template-columns: repeat(5, 1fr);
         }
-        .eigth > div >p{
+
+        .eigth>div>p {
             color: inherit;
             font: 1.3rem/1.5 var(--font-body-bold);
             letter-spacing: .06rem;
@@ -163,78 +194,106 @@
             font-weight: 100;
             font-size: medium;
         }
-        .eigth img{
+
+        .eigth img {
             width: 100%;
         }
-        .nine{
+
+        .nine {
             margin-top: 100px;
             gap: 20px;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
         }
-        .nine > div >p{
+
+        .nine>div>p {
             color: inherit;
             font: 1.3rem/1.5 var(--font-body-bold);
             letter-spacing: .06rem;
             font-weight: 100;
             font-size: small;
         }
-        .nine img{
+
+        .nine img {
             width: 100%;
         }
-        .nine h2{
+
+        .nine h2 {
             font-weight: 100;
         }
-        .centerbtn{
+
+        .centerbtn {
             padding: 10px 20px;
             color: #26262C;
             background-color: #FDFDF9;
             cursor: pointer;
-            display:block;
+            display: block;
             margin: auto;
             margin-top: -60px;
             z-index: 45555;
             position: relative;
-            border: none;            
+            border: none;
         }
+
         footer div {
             border-top: 1px solid gainsboro;
             width: 100%;
         }
-        footer img{
+
+        footer img {
             width: 100%;
         }
-        #footer2{
+
+        #footer2 {
             display: none;
         }
-        .headings{
+
+        .headings {
             margin-top: 50px;
             margin-bottom: -70px;
             border-bottom: 0.4px solid rgb(184, 180, 180);
         }
-        .headings h3{
+
+        .headings h3 {
             margin-bottom: 15px;
             font-weight: 100;
         }
-        .middle_heading h3{
+
+        .middle_heading h3 {
             text-align: center;
         }
-        .info{
-            border-top:1px solid #a4a4a8;
+
+        .info {
+            border-top: 1px solid #a4a4a8;
             margin-top: 40px;
             margin-bottom: 30px;
             /* border-bottom: 1px solid grey; */
             padding-bottom: 20px;
         }
-        .info > h2{
+
+        .info>h2 {
             font-weight: 100;
             margin: 30px 0 20px 0;
         }
-        .info h4{
+
+        .info h4 {
             /* font-size: small; */
             font-weight: 200;
         }
-        a{
+
+        a {
             color: rgb(59, 102, 112);
+        }
+
+        #home {
+            cursor: pointer;
+        }
+
+        #username {
+            font-size: larger;
+            margin: auto 30px;
+            color: rgb(79, 120, 120);
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -242,31 +301,37 @@
 <body>
     <nav>
         <div class="top_nav">
-            <div><h1>Mega Mart
-
-            </h1></div>
-            <div><input type="search" placeholder="Search">
-            <button>Search</button>
             <div>
+                <h1 id="home">Mega Mart
 
-                <img  id="cart" src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png" alt="cart">
+                </h1>
+            </div>
+            <div>
+                <span id="username"></span>
+                <input type="search" placeholder="Search">
+                <button id="searchbtn">Search</button>
+                <div>
+
+                    <img id="cart"
+                        src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png"
+                        alt="cart">
+                </div>
             </div>
         </div>
-        </div>
         <div class="bottom_nav">
-            <a href="#">New!</a>
-            <a href="#">Top-Rated</a>
+            <a href="#" class="dresses">New!</a>
+            <a href="#" class="top-rated">Top-Rated</a>
             <a href="#">Furniture</a>
             <a href="#">Décor</a>
             <a href="#">Kitchen & Dining</a>
-            <a href="#">Shoes</a>
+            <a href="#" class="shoes">Shoes</a>
             <a href="#">Bedding</a>
             <a href="#">Bath</a>
             <a href="#">Outdoor</a>
             <a href="#">Stationery</a>
             <a href="#">Kids</a>
             <a href="#">Gifts</a>
-            <a href="#">Sale</a>
+            <a href="#" class="dresses">Sale</a>
         </div>
     </nav>
     <div class="mainCont ">
@@ -384,7 +449,7 @@
                     alt="Image">
                 <p>Maeve Drop-Waist Dress</p>
             </div>
-            
+
             <div class="seven_2">
                 <img src="https://images.urbndata.com/is/image/Anthropologie/4130675950019_013_b?$an-category$&qlt=80&fit=constrain"
                     alt="Image">
@@ -448,10 +513,10 @@
                     note.</p>
                 <a href="">shop Paige jeans</a>
             </div>
-            
+
             <div class="nine_2">
                 <img src="https://images.ctfassets.net/5de70he6op10/25UKbR1vHJpq6yriubNoSD/c1e9f1ba93a96c9b3d7ac869951de29c/MTE_2.jpg?w=856&q=80&fm=webp"
-                alt="Image">
+                    alt="Image">
                 <h2>International Women's Day</h2>
                 <p>We're proud to support women-owned brands each and every day.</p>
                 <a href="">discover new favorites</a>
@@ -476,10 +541,67 @@
     </div>
     <footer>
         <div>
-            <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png" alt="./picters/Screenshot 2023-04-01 083656.png">
-            <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png" alt="./picters/Screenshot 2023-03-31 211025.png">
+            <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png"
+                alt="./picters/Screenshot 2023-04-01 083656.png">
+            <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png"
+                alt="./picters/Screenshot 2023-03-31 211025.png">
         </div>
     </footer>
 </body>
+<script>
+    let cartbtn = document.getElementById('cart')
+    let centerbtn = document.querySelectorAll('.centerbtn')
+    let searchbtn = document.querySelector('#searchbtn')
+    let home = document.getElementById('home')
+    let anchors = document.querySelectorAll('.dresses')
+    let anchor2 = document.querySelector('.shoes')
+    let anchor3 = document.querySelector('.top-rated')
+    let searchbar = document.querySelector('input[type=search]')
+    let username = document.getElementById('username')
+    username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : localStorage.getItem('username');
+
+    username.addEventListener("click", () => {
+        if (username.textContent !== "Login/Register") {
+            location.href = 'cart.html'
+        } else {
+            location.href = 'logReg.html'
+        }
+    })
+
+    cartbtn.addEventListener('click', () => {
+        location.href = 'cart.html'
+    })
+    for (let btn of centerbtn) {
+        btn.addEventListener('click', () => {
+            localStorage.setItem('searchvalue', 'dresses')
+            location.href = 'product.html'
+        })
+    }
+
+    searchbtn.addEventListener('click', () => {
+        localStorage.setItem('searchvalue', searchbar.value.toLowerCase())
+        location.href = 'product.html'
+    })
+
+    home.addEventListener('click', () => {
+        location.href = 'index.html'
+    })
+    anchor2.addEventListener('click', () => {
+        localStorage.setItem('searchvalue', 'shoes')
+        location.href = 'product.html'
+    })
+
+    for (let btn of anchors) {
+        btn.addEventListener('click', () => {
+            localStorage.setItem('searchvalue', 'dresses')
+            location.href = 'product.html'
+        })
+    }
+    anchor3.addEventListener('click', () => {
+        localStorage.setItem('searchvalue', 'top-rated')
+        location.href = 'product.html'
+    })
+
+</script>
 
 </html>

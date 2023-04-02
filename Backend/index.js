@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const {userRouter} = require('./routes/user.route')
-const {postRouter} = require('./routes/post.route')
+const {productRouter} = require('./routes/product.route')
 const {connection} = require('./db')
 const authentication = require('./middlewares/authenticate.middleware')
 require('dotenv').config()
@@ -14,7 +14,8 @@ app.use(cors())
 
 app.use('/users', userRouter)
 
-app.use('/posts',authentication, postRouter)
+app.use('/products',productRouter)
+// app.use('/posts',authentication, postRouter)
 
 app.listen(process.env.port,async()=>{
     try {
