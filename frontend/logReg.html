@@ -68,7 +68,7 @@
             grid-template-columns: repeat(1,1fr);
             /* background: linear-gradient(120deg,#2980b9, #8e44ad); */
         }
-        .login{
+        .register{
             display: none;
         }
         
@@ -119,7 +119,7 @@
     <div class="login">
         <form action="#" id="loginform">
             <p>USER NAME</p>
-            <input type="text" id="loginUsername" placeholder="Enter Your Username" required>
+            <input type="email" id="loginUsername" placeholder="Enter Your Email" required>
             <p>PASSWORD</p>
             <input type="password" id="loginPass" placeholder="Enter Your Password" required>
             <p>forgot password ?</p>
@@ -135,10 +135,6 @@
     let loginPage = document.querySelector('.login')
     let RegisterPage = document.querySelector('.register')
 
-
-    //userdata
-    let Userdata = JSON.parse(localStorage.getItem('userdata')) || []
-
     //register inputs
     let registerUserNameInp = document.getElementById('registerUsername')
     let registerNameInp = document.getElementById('registerName')
@@ -149,7 +145,7 @@
     let registerPass2Inp = document.getElementById('registerPass2')
 
     //login inputs
-    let loginUsernameInp = document.getElementById('loginUsername')
+    let loginEmailInp = document.getElementById('loginUsername')
     let loginPassInp = document.getElementById('loginPass')
 
     // getting forms
@@ -166,72 +162,73 @@
     }
 
 
-    login.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        if(loginUsernameInp.value == "admin"  && loginPassInp.value == 'admin'){
-        location.href = './admin.html'
-        }
-        else{
+    
+    const url = `http://localhost:8080/users`
 
-           window.location.href ='./index.html'
-        }
+    login.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let userObj = {
+            email: loginEmailInp.value,
+            password: loginPassInp.value,
+        };
+        fetch(`${url}/login`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(userObj),
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            localStorage.setItem("userToken", res.token);
+            localStorage.setItem("username", res.user.username);
+            showNotification(res.msg);
+            window.location.href ='index.html'
+        })
+        .catch((err) => showNotification("Wrong Credientials"));
     })
 
-
-            let flag = true;
-            for(let i=0;i<Userdata.length; i++){
-                if(Userdata[i].userName == loginUsernameInp.value  && loginPassInp.value == Userdata[i].password){
-                    localStorage.setItem('userName', loginUsernameInp.value);
-                    showNotification('Successfully Logined')
-                    flag= false;
-                    window.location.href ='./index.html'
-                    break;
-                }
-                if(flag){
-                    showNotification('Username does not exists')
-                }
-            }
-        
-    register.addEventListener('submit', (e)=>{
-        e.preventDefault()
-        let userName = registerUserNameInp.value;
-        let name = registerNameInp.value;
+    register.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let username = registerUserNameInp.value;
         let mobile = registerMobileInp.value;
         let email = registerEmailInp.value;
-        let location = registerLocationInp.value;
         let password = registerPass1Inp.value;
         let pass2 = registerPass2.value;
-        let address = '';
+        let city = registerLocationInp.value;
+
         let flag = true;
-        for(let i = 0; i<Userdata.length; i++){
-            if(Userdata[i].userName == userName){
-                flag = false;
-                showNotification('Username already exists')
-                break;
-            }
+
+        if (password != pass2) {
+            flag = false;
+            showNotification("Password does not match");
         }
 
-        if(password != pass2){
-        flag=false;
-        showNotification('Password does not match')
-        }
-        if(flag){
-            let obj={
-                userName,
-                name,
-                location,
-                address,
+        if (flag) {
+            let userObj = {
+                username,
                 mobile,
                 email,
-                password
-            }
-            Userdata.push(obj);
-            localStorage.setItem('userdata', JSON.stringify(Userdata))
-            localStorage.setItem('userName', userName)
-            showNotification('Successfully registered')
-            window.location.replace('./index.html')
+                password,
+                city
+            };
+            fetch(`${url}/register`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(userObj),
+            })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res)
+                showNotification(res.msg);
+                localStorage.setItem('username', username)
+                switchLogin();
+            })
+            .catch((err) => console.log(err));
         }
-    })
+    });
 
     function showNotification(message){
         alert(message)

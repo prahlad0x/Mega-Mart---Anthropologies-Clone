@@ -1,116 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
+  <title>Mega Mart</title>
   <style>
-     *{
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        nav {
-            height: 80px;
-            
-        }
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        .bottom_nav>a {
-            /* margin-right: 20px;
+    nav {
+      height: 80px;
+
+    }
+
+    .bottom_nav>a {
+      /* margin-right: 20px;
             margin-left: 15px;
             margin-top: 10px; */
-            text-decoration: none;
-            text-align: center;
-            color: rgb(49, 120, 164);
-        }
-        body{
-            padding: 0%;
-        }
-        .bottom_nav {
-            display: grid;
-            grid-template-columns: repeat(13,1fr);
-            border: 1px solid rgb(176, 175, 175);
-            align-items: center;
-            padding: 15px;
-        }
+      text-decoration: none;
+      text-align: center;
+      color: rgb(49, 120, 164);
+    }
 
-        .top_nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* border: 1px solid rgb(176, 175, 175); */
-            padding: 4px;
-            /* border-bottom: none; */
-        }
-        .top_nav > div h1{
-            margin: 0 0 0 50px;
-        }
-    
-        .top_nav >div:last-child {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-right: 30px;
-        }
-        #cart{
-            width: 40px;
-        }
-        .top_nav > div:last-child input{
-            padding: 8px;
-            margin-right: 10px;
-        }
-        .top_nav > div:last-child button{
-            padding: 8px 5px;
-            margin-right: 50px;
-        }
-        footer div {
-            border-top: 1px solid gainsboro;
-            width: 100%;
-        }
-        footer img{
-            width: 100%;
-        }
-        #footer2{
-            display: none;
+    body {
+      padding: 0%;
+    }
+
+    .bottom_nav {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      border: 1px solid rgb(176, 175, 175);
+      align-items: center;
+      padding: 15px;
+    }
+
+    .top_nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* border: 1px solid rgb(176, 175, 175); */
+      padding: 4px;
+      /* border-bottom: none; */
+    }
+
+    .top_nav>div h1 {
+      margin: 0 0 0 50px;
+    }
+
+    .top_nav>div:last-child {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-right: 30px;
+    }
+
+    #cart {
+      width: 40px;
+    }
+
+    .top_nav>div:last-child input {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    .top_nav>div:last-child button {
+      padding: 8px 5px;
+      margin-right: 50px;
+    }
+
+    footer div {
+      border-top: 1px solid gainsboro;
+      width: 100%;
+    }
+
+    footer img {
+      width: 100%;
+    }
+
+    #footer2 {
+      display: none;
+    }
+
+    main {
+      padding: 50px 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .cart {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .cart table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .cart th {
+      font-size: 18px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart td {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart td input[type="number"] {
+      width: 50px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid #ccc;
+    }
+
+    .total p,
+    .discount p {
+      font-size: 18px;
+    }
+
+    .total p:first-child,
+    .discount p:first-child {
+      font-weight: bold;
+    }
+
+    .checkout-btn a {
+      display: inline-block;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .checkout-btn a:hover {
+      background-color: #000;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      nav ul li a {
+        font-size: 16px;
+      }
+
+      .cart th {
+        font-size: 16px;
+      }
+
+      .cart td {
+        font-size: 16px;
+      }
+
+      .cart td input[type="number"] {
+        width: 40px;
+        padding: 3px;
+      }
+
+      .total p,
+      .discount p {
+        font-size: 16px;
+      }
+
+      .total p:first-child,
+      .discount p:first-child {
+        font-weight: normal;
+      }
+
+      .checkout-btn a {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+    #home{
+      cursor: pointer;
+    }
+    #username {
+            font-size: larger;
+            margin: auto 30px;
+            color: rgb(79, 120, 120);
+            text-decoration: underline;
+            cursor: pointer;
         }
   </style>
 </head>
+
 <body>
   <nav>
     <div class="top_nav">
-        <div><h1>Mega Mart
-
-        </h1></div>
-        <div><input type="search" placeholder="Search">
+      <div>
+        <h1 id="home">Mega Mart</h1>
+      </div>
+      <div>
+        <span id="username"></span>
+        <input type="search" placeholder="Search">
         <button>Search</button>
         <div>
 
-            <img  id="cart" src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png" alt="cart">
+          <img id="cart"
+            src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png"
+            alt="cart">
         </div>
-    </div>
+      </div>
     </div>
     <div class="bottom_nav">
-        <a href="#">New!</a>
-        <a href="#">Top-Rated</a>
-        <a href="#">Furniture</a>
-        <a href="#">Décor</a>
-        <a href="#">Kitchen & Dining</a>
-        <a href="#">Shoes</a>
-        <a href="#">Bedding</a>
-        <a href="#">Bath</a>
-        <a href="#">Outdoor</a>
-        <a href="#">Stationery</a>
-        <a href="#">Kids</a>
-        <a href="#">Gifts</a>
-        <a href="#">Sale</a>
+      <a href="#" class="dresses">New!</a>
+      <a href="#" class="top-rated">Top-Rated</a>
+      <a href="#">Furniture</a>
+      <a href="#">Décor</a>
+      <a href="#">Kitchen & Dining</a>
+      <a href="#" class="shoes">Shoes</a>
+      <a href="#">Bedding</a>
+      <a href="#">Bath</a>
+      <a href="#">Outdoor</a>
+      <a href="#">Stationery</a>
+      <a href="#">Kids</a>
+      <a href="#">Gifts</a>
+      <a href="#" class="dresses">Sale</a>
     </div>
-</nav>
-<div class="MainCont"></div>
-<footer>
-  <div>
-      <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png" alt="./picters/Screenshot 2023-04-01 083656.png">
-      <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png" alt="./picters/Screenshot 2023-03-31 211025.png">
-  </div>
-</footer>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="cart">
+        <h2>Your Cart</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Product 1</td>
+              <td>$20.00</td>
+              <td><input type="number" value="1" min="1"></td>
+              <td>$20.00</td>
+            </tr>
+            <tr>
+              <td>Product 2</td>
+              <td>$30.00</td>
+              <td><input type="number" value="2" min="1"></td>
+              <td>$60.00</td>
+            </tr>
+            <tr>
+              <td>Product 3</td>
+              <td>$15.00</td>
+              <td><input type="number" value="1" min="1"></td>
+              <td>$15.00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cart-total">
+          <div class="total">
+            <p>Total</p>
+            <p>$95.00</p>
+          </div>
+          <div class="discount">
+            <p>Discount</p>
+            <p>$10.00</p>
+          </div>
+          <div class="checkout-btn">
+            <a href="checkout.html">Checkout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div>
+      <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png"
+        alt="./picters/Screenshot 2023-04-01 083656.png">
+      <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png"
+        alt="./picters/Screenshot 2023-03-31 211025.png">
+    </div>
+  </footer>
 </body>
+<script>
+  // Get DOM Elements
+  const table = document.querySelector('.cart table');
+  const quantityInputs = table.querySelectorAll('input[type="number"]');
+  const totalEl = document.querySelector('.total p:last-child');
+  const discountEl = document.querySelector('.discount p:last-child');
+  const checkoutBtn = document.querySelector('.checkout-btn a');
+  let username = document.getElementById('username')
+    username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : "Logout";
+
+    username.addEventListener("click", () => {
+        if (username.textContent !== "Login/Register") {
+            localStorage.setItem('username', '')
+            localStorage.setItem('userToken', '')
+            location.replace('index.html')
+        } else {
+            location.href = 'logReg.html'
+        }
+    })
+
+  // Add Event Listeners
+  quantityInputs.forEach(input => {
+    input.addEventListener('change', updateTotal);
+  });
+
+  checkoutBtn.addEventListener('click', goToCheckout);
+
+  // Functions
+  function updateTotal() {
+    let total = 0;
+
+    // Loop through all rows in the table
+    table.querySelectorAll('tbody tr').forEach(row => {
+      // Get the price and quantity of the current product
+      const price = parseFloat(row.querySelector('.price').textContent);
+      const quantity = parseInt(row.querySelector('input[type="number"]').value);
+
+      // Calculate the subtotal for this product and add it to the total
+      const subtotal = price * quantity;
+      total += subtotal;
+    });
+
+    // Update the total in the DOM
+    totalEl.textContent = `$${total.toFixed(2)}`;
+
+    // Calculate and update the discount in the DOM
+    const discount = total * 0.1; // 10% discount
+    discountEl.textContent = `- $${discount.toFixed(2)}`;
+  }
+
+  function goToCheckout(event) {
+    event.preventDefault();
+
+    // Redirect to checkout.html
+    window.location.href = 'checkout.html';
+  }
+  let cartbtn = document.getElementById('cart')
+    cartbtn.addEventListener('click',()=>{
+        location.href = 'cart.html'
+    })
+
+  let home = document.getElementById('home')
+    home.addEventListener('click', ()=>{
+        location.href = 'index.html'
+    })
+    let anchors = document.querySelectorAll('.dresses')
+    let anchor2 = document.querySelector('.shoes')
+    anchor2.addEventListener('click', ()=>{
+        localStorage.setItem('searchvalue', 'shoes')
+        location.href = 'product.html'
+    })
+    let anchor3 = document.querySelector('.top-rated')
+    anchor3.addEventListener('click', ()=>{
+        localStorage.setItem('searchvalue', 'top-rated')
+        location.href = 'product.html'
+    })
+
+    for(let btn of anchors){
+        btn.addEventListener('click',()=>{
+            localStorage.setItem('searchvalue', 'dresses')
+            location.href = 'product.html'
+        })
+    }
+
+</script>
+
 </html>

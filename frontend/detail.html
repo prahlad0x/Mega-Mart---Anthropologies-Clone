@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 100px auto 100px auto;
+
+        }
+
+        .product-image {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details h2 {
+            font-size: 32px;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .product-details p {
+            font-size: 18px;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .product-details label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-details select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .product-details button {
+            display: block;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .product-details button:hover {
+            background-color: #006B96;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        nav {
+            height: 80px;
+
+        }
+
+        .bottom_nav>a {
+            /* margin-right: 20px;
+            margin-left: 15px;
+            margin-top: 10px; */
+            text-decoration: none;
+            text-align: center;
+            color: rgb(49, 120, 164);
+        }
+
+        body {
+            padding: 0%;
+        }
+
+        .bottom_nav {
+            display: grid;
+            grid-template-columns: repeat(13, 1fr);
+            border: 1px solid rgb(176, 175, 175);
+            align-items: center;
+            padding: 15px;
+        }
+
+        .top_nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* border: 1px solid rgb(176, 175, 175); */
+            padding: 4px;
+            /* border-bottom: none; */
+        }
+
+        .top_nav>div h1 {
+            margin: 0 0 0 50px;
+        }
+
+        .top_nav>div:last-child {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-right: 30px;
+        }
+
+        #cart {
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .top_nav>div:last-child input {
+            padding: 8px;
+            margin-right: 10px;
+        }
+
+        .top_nav>div:last-child button {
+            padding: 8px 5px;
+            margin-right: 50px;
+        }
+
+        footer div {
+            border-top: 1px solid gainsboro;
+            width: 100%;
+        }
+
+        footer img {
+            width: 100%;
+        }
+
+        #footer2 {
+            display: none;
+        }
+
+        #home {
+            cursor: pointer;
+        }
+        #username {
+            font-size: larger;
+            margin: auto 30px;
+            color: rgb(79, 120, 120);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="top_nav">
+            <div>
+                <h1 id="home">Mega Mart
+
+                </h1>
+            </div>
+            <div>
+                <span id="username"></span>
+                <input type="search" placeholder="Search">
+                <button>Search</button>
+                <div>
+
+                    <img id="cart"
+                        src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png"
+                        alt="cart">
+                </div>
+            </div>
+        </div>
+        <div class="bottom_nav">
+            <a href="#" class="dresses">New!</a>
+            <a href="#" class="top-rated">Top-Rated</a>
+            <a href="#">Furniture</a>
+            <a href="#">Décor</a>
+            <a href="#">Kitchen & Dining</a>
+            <a href="#" class="shoes">Shoes</a>
+            <a href="#">Bedding</a>
+            <a href="#">Bath</a>
+            <a href="#">Outdoor</a>
+            <a href="#">Stationery</a>
+            <a href="#">Kids</a>
+            <a href="#">Gifts</a>
+            <a href="#" class="dresses">Sale</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="product-image">
+            <img src="https://img.icons8.com/external-filled-outline-design-circle/1x/external-Cart-school-and-learning-filled-outline-design-circle.png"
+                alt="Product Image" />
+        </div>
+        <div class="product-details">
+            <h2 class="product-name">Product Name</h2>
+            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus
+                minus veniam ea eligendi</p>
+            <div class="product-quantity">
+                <label for="quantity">Quantity:</label>
+                <select id="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="product-color">
+                <label for="color">Color:</label>
+                <select id="color">
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                </select>
+            </div>
+            <button id="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <img id="footer" src="./picters/Screenshot 2023-04-01 083656.png"
+                alt="./picters/Screenshot 2023-04-01 083656.png">
+            <img id="footer2" src="./picters/Screenshot 2023-03-31 211025.png"
+                alt="./picters/Screenshot 2023-03-31 211025.png">
+        </div>
+    </footer>
+    <script>
+        const productImage = document.querySelector(".product-image img");
+        const productName = document.querySelector(".product-name");
+        const productDescription = document.querySelector(".product-description");
+        const quantitySelector = document.getElementById("quantity");
+        const colorSelector = document.getElementById("color");
+        const addToCartBtn = document.getElementById("add-to-cart");
+        let username = document.getElementById('username')
+        username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : localStorage.getItem('username');
+
+        username.addEventListener("click", () => {
+            if (username.textContent !== "Login/Register") {
+                location.href = 'cart.html'
+            } else {
+                location.href = 'logReg.html'
+            }
+        })
+
+        let product = {
+            name: "",
+            description: "",
+            quantity: 1,
+            color: "",
+        };
+
+        quantitySelector.addEventListener("change", () => {
+            product.quantity = parseInt(quantitySelector.value);
+        });
+
+        colorSelector.addEventListener("change", () => {
+            product.color = colorSelector.value;
+        });
+
+        addToCartBtn.addEventListener("click", () => {
+            product.name = productName.textContent;
+            product.description = productDescription.textContent;
+
+            localStorage.setItem("product", JSON.stringify(product));
+        });
+
+        let cartbtn = document.getElementById('cart')
+        cartbtn.addEventListener('click', () => {
+            location.href = 'cart.html'
+        })
+
+        let home = document.getElementById('home')
+        home.addEventListener('click', () => {
+            location.href = 'index.html'
+        })
+        let anchors = document.querySelectorAll('.dresses')
+        let anchor2 = document.querySelector('.shoes')
+        anchor2.addEventListener('click', () => {
+            localStorage.setItem('searchvalue', 'shoes')
+        })
+        let anchor3 = document.querySelector('.top-rated')
+        anchor3.addEventListener('click', () => {
+            localStorage.setItem('searchvalue', 'top-rated')
+        })
+
+
+        for (let btn of anchors) {
+            btn.addEventListener('click', () => {
+                localStorage.setItem('searchvalue', 'dresses')
+                location.href = 'product.html'
+            })
+        }
+
+    </script>
+</body>
+
+</html>
