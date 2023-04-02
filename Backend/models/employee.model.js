@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
 
 const empSchema = mongoose.Schema({
-    
+    name : String,
+    image : String,
+    department:String,
+    salary :Number
 })
 
 
-const ProductModel = mongoose.model('product', productSchema)
+const EmpModel = mongoose.model('employee', empSchema)
 
-module.exports = {ProductModel}
+module.exports = {EmpModel}

@@ -352,16 +352,6 @@
                 <div class="mainButton-box">
                     <button id="mainbutton">More Options</button>
                     <button id="getAllProducs" data-id="Products" class="getbutton">Fetch All Products</button>
-                    <select name="" id="selecttag">
-                        <option value="">Get Products</option>
-                        <option value="shirt">Shirts</option>
-                        <option value="jeans">Jeans</option>
-                        <option value="kurtas">kurtas</option>
-                        <option value="shoes">Shoes</option>
-                        <option value="sarees">Sarees</option>
-                        <option value="dress-material">Dress-material</option>
-                        <option value="sandals">Sandals</option>
-                    </select>
                     <button id="getAllUsers" data-id="Users" class="getbutton">Fetch All Users</button>
                     <button id="getAllOrders"  data-id="Orders" class="getbutton">Fetch All Orders</button>
                     <button id="getAllEmployees" data-id="Employees" class="getbutton">Fetch All Employees</button>
@@ -372,23 +362,16 @@
                     <input type="text" id="addProductTitle" placeholder="Product Title" required>
                     <input type="number" id="addProductPrice" placeholder="Product Price" required>
                     <input type="text" id="addProductImage" placeholder="Product ImageUrl"required>
-                    <input type="text" id="addProductCategory" placeholder="Product Categroy" required>
-                    <input type="text" id="addProductGender" placeholder="Product Gender" required>
-                    <input type="text" id="addProductColor" placeholder="Product Color" required>
-                    <input type="text" id="addProductDescription" placeholder="Product Description" required>
+                    <input type="text" id="addProducttype" placeholder="Product type" required>
                     <button id="add-Producbtn">Add Product</button>
                     <div><hr></div>
                 </div>
                 <div class="updateProduct">
                     <h1 id="update_details">Upate Product</h1>
-                    <input type="text"  id="updateProductId" placeholder="Product Id" required>
                     <input type="text" id="updateProductTitle" placeholder="Product Title" required>
                     <input type="number" id="updateProductPrice" placeholder="Product Price" required>
                     <input type="text" id="updateProductImage" placeholder="Product ImageUrl" required>
-                    <input type="text" id="updateProductCategory" placeholder="Product Categroy" required>
-                    <input type="text" id="updateProductGender" placeholder="Product Gender" required>
-                    <input type="text" id="updateProductColor" placeholder="Product Color" required>
-                    <input type="text" id="updateProductDescription" placeholder="Product Description" required>
+                    <input type="text" id="updateProducttype" placeholder="Product Color" required>
                     <button id="update-Productbtn">Update Product</button>
                     <div><hr></div>
                 </div>
@@ -407,7 +390,6 @@
                 </div>
                 <div class="updateProduct AddEmployee">
                     <h1 id="update_details">Add Employee</h1>
-                    <!-- <input type="text" id="addEmployeeid" placeholder="Employee Id"> -->
                     <input type="text" placeholder="Employee Name" id="addEmployeeName">
                     <input type="text" placeholder="Employee ImageUrl" value="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg" id="addEmployeeImage">
                     <input type="number" placeholder="Employee Salary" id="addEmployeeSalary">
@@ -430,27 +412,10 @@
     </div>
 </body>
 <script>  
-    //getting products
-    let AllProducts = JSON.parse(localStorage.getItem('allProducts')) ||[]
-
-    // getting employees
-    let AllEmployees = JSON.parse(localStorage.getItem('employee'))||[]
-    let employeeCount = document.getElementById('incomeemployees')
-
-    //getting users
-    let userdata = JSON.parse(localStorage.getItem('userdata')) ||[]
-
-    //total user count
-    let userTotal = document.getElementById('userTotal')
-    userTotal.innerText = userdata.length;
-
-    //getting all order
-    let orders = JSON.parse(localStorage.getItem('orders'))||[]
-
-
+    const url = `http://localhost:8080/`
     //orders count 
     let totalorders = document.getElementById('ordreTotal')
-    totalorders.innerText = orders.length
+    totalorders.innerText = 23
 
     //total income 
     let total_income = document.getElementById('incomeTotal')
@@ -458,23 +423,15 @@
 
     // add Product
     let addProductTitleInp = document.getElementById('addProductTitle');
-    let addProductPriceInp = document.getElementById('addProductPrice');
-    let addProductColorInp = document.getElementById('addProductColor');
-    let addProductCategoryInp = document.getElementById('addProductCategory');
-    let addProductGenderInp = document.getElementById('addProductGender');
+    let addProductPriceInp = document.getElementById('addProductPrice')
     let addProductImageInp = document.getElementById('addProductImage');
-    let addProductDescriptionInp = document.getElementById('addProductDescription');
     let addProductbtn = document.getElementById('add-Producbtn');
 
     // update Product
     let updateProductIdInp = document.getElementById("updateProductId");
     let updateProductTitleInp = document.getElementById('updateProductTitle');
     let updateProductPriceInp = document.getElementById('updateProductPrice');
-    let updateProductColorInp = document.getElementById('updateProductColor');
-    let updateProductCategoryInp = document.getElementById('updateProductCategory');
-    let updateProductGenderInp = document.getElementById('updateProductGender');
     let updateProductImageInp = document.getElementById('updateProductImage');
-    let updateProductDescriptionInp = document.getElementById('updateProductDescription');
     let updateProductbtn = document.getElementById('update-Productbtn');
 
     // update Product Price
@@ -505,12 +462,6 @@
 
     //containers
     let main_container = document.querySelector('.card_container');
-
-    // notification 
-    let notification = document.querySelector('.notification');
-
-    //selecttag
-    let selectTag = document.getElementById('selecttag');
 
     // click events
     addProductbtn.addEventListener('click',()=>{
@@ -549,15 +500,13 @@
 
     function fetching(detail){
         if(detail == 'Products'){
-            getProducts(AllProducts)
-            selectTag.style.display='block'
-            selectTag.addEventListener('change',filter)
+            fetch(`${url}products/`)
+            .then(res=>res.json())
+        .then(res=> getProducts(res.products))
+        .catch(err=> console.log(err))
         }
         if(detail == 'Orders'){
             main_container.innerHTML = `<h1>Orders btao bhai ko...</h1>`
-
-
-            getOrders();
         }
         if(detail == 'Employees'){
            getEmployees();
@@ -569,15 +518,7 @@
     }
 
     function total(){
-        let total = 0;
-        for(let i=0; i<orders.length; i++){
-            total += orders[i].price * orders[i].quantity
-        }
-        total_income.innerText = total
-    }
-
-    function AllEmployeesCount(){
-        employeeCount.innerText = AllEmployees.length;
+        total_income.innerText =  1100223
     }
 
     function addEmployee(){
@@ -586,26 +527,24 @@
             salary : addEmployeeSalaryInp.value,
             image:addEmployeeImageInp.value,
             department:addEmployeeDepartmentInp.value,
-            id:Math.floor(Math.random()*9000+1000)
         }
 
-        AllEmployees.push(obj)
-        localStorage.setItem('employee',JSON.stringify(AllEmployees));
-        AllEmployeesCount()
+       
         showNotification('Employee Added Successfully')
     }
 
     function updateSalary(){
         let id = updateSalaryIdInp.value;
         let newsalary = updateSalarySalaryInp.value;
-        AllEmployees = AllEmployees.filter((el)=>{
-            if(el.id == id){
-                el.salary = newsalary
-            };
-            return el
-        })
-        localStorage.setItem('employee',JSON.stringify(AllEmployees))
-        showNotification('Salary Updated Successfully')
+        fetch(`${url}employees/update`,{
+            method:"PATCH",
+            body : JSON.stringify({salary :newsalary}),
+            headers:{"Content-type": "application/json"}
+        }).then(res=>res.json())
+        .then(res=> {
+            showNotification(res.msg)
+        location.reload()})
+        .catch(err=> console.log(err))
     }
 
     function getEmployees(){
@@ -635,8 +574,6 @@
             })
             OptionBtn.innerText  = 'Show Less Option';
         }else{
-            selectTag.style.display ='none'
-            selectTag.value='';
             fetchingBtns.forEach((el)=>{
                 el.style.display='none';
             })
@@ -662,8 +599,7 @@
                 <img src="${item.image}" alt="image">
             </div>
             <div>
-                <p> id : ${item.id}</p>
-                <p> Name : ${item.name}</p>
+                <p> id : ${item._id}</p>
                 <p> Salary : ${item.salary}</p>
                 <p> Department : ${item.department}</p>
             </div></div>`
@@ -676,13 +612,9 @@
                     <img src="${item.image}" alt="Product Loading">
                     </div>
                     <div class="product2card">
-                        <p>id: ${item.id}</p>
+                        <p>id: ${item._id}</p>
                         <p>title: ${item.title}</p>
-                        <p>category: ${item.category}</p>
-                        <p>gender: ${item.gender}</p>
                         <p>price: ${item.price}</p>
-                        <p>color: ${item.color}</p>
-                        <p>description: ${item.description}</p>
                     </div>
                 </div>`
         return card;
@@ -694,114 +626,75 @@
                 <img src="https://img.freepik.com/free-vector/follow-me-social-business-theme-design_24877-50426.jpg?size=338&ext=jpg" alt="image">
             </div>
             <div>
-                <p> UserName : ${item.userName}</p>
-                <p> Name : ${item.name} </p>
+                <p> UserName : ${item.username}</p>
                 <p> Email : ${item.email}   ||    Contact : ${item.mobile}</p>
-                <p> City : ${item.location}</p>
+                <p> City : ${item.city}</p>
             </div></div>`
         return card;
     }
 
-    function filter(){
-        let value = selectTag.value;
-        if(value == ''){
-            getProducts(AllProducts)
-        }
-        else{
-            let filtered = AllProducts.filter((a)=>a.category == value);
-            getProducts(filtered)
-        }
-    }
-
     function addProduct(){
         let o = {
-            id : Math.ceil(Math.random()*900+100),
-            description: addProductDescriptionInp.value,
             title :addProductTitleInp.value,
-            color  : addProductColorInp.value,
-            gender :addProductGenderInp.value,
-            category:addProductCategoryInp.value,
             image:addProductImageInp.value,
-            price:addProductPriceInp.value
+            price:addProductPriceInp.value,
+            type: "dresses"
         }
-        AllProducts.push(o)
-        localStorage.setItem('allProducts',JSON.stringify(AllProducts))
-        showNotification('Product Added Successfully')
+        fetch(`${url}/products/add`,{
+            method:"POST",
+            body : JSON.stringify(o),
+            headers:{"Content-type": "application/json"}
+        }).then(res=>res.json())
+        .then(res=> {
+            showNotification(res.msg)
+        location.reload()})
+        .catch(err=> console.log(err))
     }
 
     function updateProduct(){
         let id = updateProductIdInp.value;
-        let description= updateProductDescriptionInp.value;
         let   title = updateProductTitleInp.value;
-        let  color  = updateProductColorInp.value;
-        let   gender = updateProductGenderInp.value;
-        let   category = updateProductCategoryInp.vaue;
         let   image = updateProductImageInp.value;
         let price = updateProductPriceInp.value;
-        
-        AllProducts = AllProducts.filter((el)=>{
-            if(el.id== id){
-                el.description = description;
-                el.title = title;
-                el.color = color;
-                el.gender = gender;
-                el.category = category;
-                el.image = image;
-                el.price = price
-                showNotification('Product Updated Successfully') 
-            }
+        let type = "top-rated";
+        fetch(`${url}/products/update/:id`,{
+            method:"PATCH",
+            body : JSON.stringify({title,image,price,type}),
+            headers:{"Content-type": "application/json"}
+        }).then(res=>res.json())
+        .then(res=> {
+            showNotification(res.msg)
+            location.reload()
         })
-        localStorage.setItem('allProducts', JSON.stringify(AllProducts))
+        .catch(err=> console.log(err))
     }
 
     function updateProductPrice(){
         let id = updateProductPriceIdInp.value;
         let price = updateProduct_PriceInp.value;
-        AllProducts = AllProducts.filter((el)=>{
-            if(el.id== id){
-                el.price = price
-                showNotification('Price Updated Successfully')
-            }
-            return el
-        })
-        localStorage.setItem('allProducts', JSON.stringify(AllProducts))
+        fetch(`${url}products/update/:id`,{
+            method:"PATCH",
+            body : JSON.stringify({price}),
+            headers:{"Content-type": "application/json"}
+        }).then(res=>res.json())
+        .then(res=> {showNotification(res.msg)
+        location.reload()})
+        .catch(err=> console.log(err))
     }
 
     function deleteProduct(){
         let id = delelteProductIdInp.value;
-        AllProducts = AllProducts.filter((el)=>el.id != id)
-        localStorage.setItem('allProducts', JSON.stringify(AllProducts))
-        showNotification('Product Deleted Successfully')
+        fetch(`${url}products/delete/id`,{
+            method:"DELETE",
+            headers:{"Content-type": "application/json"}
+        }).then(res=>res.json())
+        .then(res=> {
+            showNotification(res.msg)
+            location.reload()
+        })
+        .catch(err=> console.log(err))
     }
-    
-
-    function orderscard(item){
-        let card = `<div id="ProductCardMAIN">
-                    <div class="productcard">
-                    <img src="${item.image}" alt="Product Loading">
-                    </div>
-                    <div class="product2card">
-                        <p>TO: ${item.userName}</p>
-                        <p>id: ${item.id}  ||  Status:${(item.status)? 'Completed' : "Pending"}</p> 
-                        <p>email: ${item.email}</p> 
-                        <p> Contact: ${item.mobile}</p>
-                        <p>price: ${item.price}</p>
-                        <p>address:${item.address}</p>
-                    </div>
-                </div>`
-        return card;
-    }
-   
-    function getOrders(){
-        main_container.innerHTML = '';
-        let html = `
-        ${orders.map((ele)=>orderscard(ele)).join('')}`
-        main_container.innerHTML = html;
-    }
-   
-
-   AllEmployeesCount();
-   total()
+       
 
 </script>
 </html>

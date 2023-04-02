@@ -17,7 +17,7 @@ productRouter.get('/', async(req,res)=>{
 
 productRouter.get('/:id',async(req,res)=>{
     try {
-        const product = await ProductModel.find({_id:req.params.id})
+        const product = await ProductModel.findOne({_id:req.params.id})
         res.status(200).send({msg:"product", product:product})
     } catch (error) {
         res.status(400).send({error})

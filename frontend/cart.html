@@ -85,130 +85,120 @@
       display: none;
     }
 
-    main {
-      padding: 50px 0;
+
+    #home {
+      cursor: pointer;
+    }
+
+    #username {
+      font-size: larger;
+      margin: auto 30px;
+      color: rgb(79, 120, 120);
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .cart {
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .cart h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .cart table {
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      /* border: 1px solid black; */
     }
 
-    .cart th {
-      font-size: 18px;
+    main {
+      width: 90%;
+      display: grid;
+      grid-template-columns: 78% 20%;
+      gap: 30px;
+      margin: 100px auto;
+      padding: 10px;
+    }
+
+    #ProductCardMAIN {
+      display: flex;
+      /* height: 0%; */
+      padding: 10px;
+      border: 1px solid rgb(197, 196, 196);
+    }
+
+    .productcard img {
+      width: 100%;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+    .product2card{
       padding: 10px 0;
-      border-bottom: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    .productcard {
+      margin: auto 10px auto auto;
     }
 
-    .cart td {
-      padding: 10px 0;
-      border-bottom: 1px solid #ccc;
+    .total>div {
+      border: 1px solid rgb(207, 189, 189);
+      border-radius: 10px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
     }
 
-    .cart td input[type="number"] {
-      width: 50px;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
+    .total {
+      border-left: 1px solid rgb(131, 131, 131);
+      padding-left: 30px;
     }
 
-    .cart-total {
+    .total>div>div {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      border-top: 1px solid #ccc;
+      font-size: larger;
+      border-bottom: 1px solid rgb(249, 230, 216);
     }
 
-    .total p,
-    .discount p {
-      font-size: 18px;
+    .total h3 {
+      text-align: center;
+      font-size: larger;
+      font-weight: 200;
     }
 
-    .total p:first-child,
-    .discount p:first-child {
-      font-weight: bold;
-    }
-
-    .checkout-btn a {
-      display: inline-block;
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 3px;
-      text-transform: uppercase;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .checkout-btn a:hover {
-      background-color: #000;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 24px;
-      }
-
-      nav ul li a {
-        font-size: 16px;
-      }
-
-      .cart th {
-        font-size: 16px;
-      }
-
-      .cart td {
-        font-size: 16px;
-      }
-
-      .cart td input[type="number"] {
-        width: 40px;
-        padding: 3px;
-      }
-
-      .total p,
-      .discount p {
-        font-size: 16px;
-      }
-
-      .total p:first-child,
-      .discount p:first-child {
-        font-weight: normal;
-      }
-
-      .checkout-btn a {
-        padding: 8px 16px;
-        font-size: 14px;
-      }
-    }
-    #home{
+    .total>div button {
       cursor: pointer;
+      background-color: rgb(100, 243, 238);
+      border: 1px solid rgb(244, 184, 132);
+      border-radius: 8px;
+      padding: 8px 5px;
+      margin: 10px 15px;
+      font-size: larger;
     }
-    #username {
-            font-size: larger;
-            margin: auto 30px;
-            color: rgb(79, 120, 120);
-            text-decoration: underline;
-            cursor: pointer;
-        }
+    .total>div button:hover{
+      background-color: rgb(37, 187, 37);
+      color: white;
+    }
+
+    #quantityselect {
+      margin-top: 30px;
+      cursor: pointer;
+      padding: 5px 8px;
+    }
+
+    #removebtn {
+      width: 50%;
+      padding: 7px 8px;
+      cursor: pointer;
+      margin: 30px 20px;
+      background-color: rgb(175, 251, 249);
+      border: 1px solid rgb(244, 184, 132);
+      border-radius: 5px;
+    }
+    #totalvalue{
+      color: red;
+      text-decoration: line-through;
+    }
+
+    #removebtn:hover {
+      background-color: rgb(219, 125, 125);
+    }
   </style>
 </head>
 
@@ -248,52 +238,24 @@
   </nav>
 
   <main>
-    <div class="container">
-      <div class="cart">
-        <h2>Your Cart</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Product 1</td>
-              <td>$20.00</td>
-              <td><input type="number" value="1" min="1"></td>
-              <td>$20.00</td>
-            </tr>
-            <tr>
-              <td>Product 2</td>
-              <td>$30.00</td>
-              <td><input type="number" value="2" min="1"></td>
-              <td>$60.00</td>
-            </tr>
-            <tr>
-              <td>Product 3</td>
-              <td>$15.00</td>
-              <td><input type="number" value="1" min="1"></td>
-              <td>$15.00</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="cart-total">
-          <div class="total">
-            <p>Total</p>
-            <p>$95.00</p>
-          </div>
-          <div class="discount">
-            <p>Discount</p>
-            <p>$10.00</p>
-          </div>
-          <div class="checkout-btn">
-            <a href="checkout.html">Checkout</a>
-          </div>
+    <div class="container"></div>
+    <div class="total">
+      <div>
+        <h3>Order Summary</h3>
+        <div>
+          <p>Total : </p>
+          <p id="totalvalue"></p>
         </div>
+        <div>
+          <p>Discount : </p>
+          <p>15%</p>
+        </div>
+
+        <div>
+          <p>Discounted Price : </p>
+          <p id="discounttotal"></p>
+        </div>
+        <button id="checkout"> Proceed To Checkout</button>
       </div>
     </div>
   </main>
@@ -307,88 +269,156 @@
   </footer>
 </body>
 <script>
-  // Get DOM Elements
-  const table = document.querySelector('.cart table');
-  const quantityInputs = table.querySelectorAll('input[type="number"]');
-  const totalEl = document.querySelector('.total p:last-child');
-  const discountEl = document.querySelector('.discount p:last-child');
-  const checkoutBtn = document.querySelector('.checkout-btn a');
+  const url = 'https://clear-slug-stockings.cyclic.app/'
+  const userId = localStorage.getItem('userId')
+  let userCart = []
   let username = document.getElementById('username')
-    username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : "Logout";
-
-    username.addEventListener("click", () => {
-        if (username.textContent !== "Login/Register") {
-            localStorage.setItem('username', '')
-            localStorage.setItem('userToken', '')
-            location.replace('index.html')
-        } else {
-            location.href = 'logReg.html'
-        }
-    })
-
-  // Add Event Listeners
-  quantityInputs.forEach(input => {
-    input.addEventListener('change', updateTotal);
-  });
-
-  checkoutBtn.addEventListener('click', goToCheckout);
-
-  // Functions
-  function updateTotal() {
-    let total = 0;
-
-    // Loop through all rows in the table
-    table.querySelectorAll('tbody tr').forEach(row => {
-      // Get the price and quantity of the current product
-      const price = parseFloat(row.querySelector('.price').textContent);
-      const quantity = parseInt(row.querySelector('input[type="number"]').value);
-
-      // Calculate the subtotal for this product and add it to the total
-      const subtotal = price * quantity;
-      total += subtotal;
-    });
-
-    // Update the total in the DOM
-    totalEl.textContent = `$${total.toFixed(2)}`;
-
-    // Calculate and update the discount in the DOM
-    const discount = total * 0.1; // 10% discount
-    discountEl.textContent = `- $${discount.toFixed(2)}`;
-  }
-
-  function goToCheckout(event) {
-    event.preventDefault();
-
-    // Redirect to checkout.html
-    window.location.href = 'checkout.html';
-  }
-  let cartbtn = document.getElementById('cart')
-    cartbtn.addEventListener('click',()=>{
-        location.href = 'cart.html'
-    })
-
   let home = document.getElementById('home')
-    home.addEventListener('click', ()=>{
-        location.href = 'index.html'
-    })
-    let anchors = document.querySelectorAll('.dresses')
-    let anchor2 = document.querySelector('.shoes')
-    anchor2.addEventListener('click', ()=>{
-        localStorage.setItem('searchvalue', 'shoes')
-        location.href = 'product.html'
-    })
-    let anchor3 = document.querySelector('.top-rated')
-    anchor3.addEventListener('click', ()=>{
-        localStorage.setItem('searchvalue', 'top-rated')
-        location.href = 'product.html'
-    })
+  let anchor3 = document.querySelector('.top-rated')
+  let cartbtn = document.getElementById('cart')
+  let anchors = document.querySelectorAll('.dresses')
+  let anchor2 = document.querySelector('.shoes')
+  let container = document.querySelector('.container')
+  let checkoutbtn = document.getElementById('checkout')
+  username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : "Logout";
 
-    for(let btn of anchors){
-        btn.addEventListener('click',()=>{
-            localStorage.setItem('searchvalue', 'dresses')
-            location.href = 'product.html'
-        })
+  username.addEventListener("click", () => {
+    if (username.textContent !== "Login/Register") {
+      localStorage.setItem('username', '')
+      localStorage.setItem('userToken', '')
+      location.replace('index.html')
+    } else {
+      location.href = 'logReg.html'
     }
+  })
+
+  cartbtn.addEventListener('click', () => {
+    location.href = 'cart.html'
+  })
+
+  home.addEventListener('click', () => {
+    location.href = 'index.html'
+  })
+
+  anchor2.addEventListener('click', () => {
+    localStorage.setItem('searchvalue', 'shoes')
+    location.href = 'product.html'
+  })
+
+  anchor3.addEventListener('click', () => {
+    localStorage.setItem('searchvalue', 'top-rated')
+    location.href = 'product.html'
+  })
+
+  checkoutbtn.addEventListener('click', ()=>{
+    location.href= 'checkout.html'
+  })
+
+  for (let btn of anchors) {
+    btn.addEventListener('click', () => {
+      localStorage.setItem('searchvalue', 'dresses')
+      location.href = 'product.html'
+    })
+  }
+
+  function getcart() {
+    fetch(`${url}users/${userId}`)
+      .then(res => res.json())
+      .then(res => {
+        userCart = res.user.cart
+        total()
+        showCart()
+      }).catch(err => console.log(err))
+  }
+
+  function showCart() {
+    if (userCart.length == 0) {
+      container.innerHTML = `<br><br><br><br><h1>There is no product in your cart !</h1><br><br><br>`
+    } else {
+      container.innerHTML = `${userCart.map(ele => getproductCard(ele)).join('')}`
+      addevent()
+    }
+  }
+
+  function addevent(){
+    let btns = document.querySelectorAll('#removebtn')
+    let quantitySelectors = document.querySelectorAll('#quantityselect')
+    for(let btn of btns){
+      btn.addEventListener('click',(e)=>{
+        let id = e.target.dataset.id
+        userCart = userCart.filter(ele=> ele._id != id)
+        updateCart()
+        alert('Product removed from cart')
+        location.reload()
+      })
+    }
+
+    for(let s of quantitySelectors){
+      s.addEventListener('change', (e)=>{
+        let id = e.target.dataset.id
+        for(let i = 0; i<userCart.length; i++){
+          if(userCart[i]._id == id){
+            userCart[i].quantity = s.value
+            break;
+          }
+        }
+        total()
+        updateCart()
+      })
+    }
+  }
+
+  function updateCart() {
+    let obj = {
+      cart: userCart,
+    }
+    fetch(`${url}users/updatecart/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(obj)
+    }).then(res => res.json())
+      .then(res =>res)
+      .catch(err => console.log(err))
+  }
+  
+  function getproductCard(item) {
+    let card = `<div id="ProductCardMAIN">
+                    <div class="productcard">
+                    <img src="${item.image}" alt="Product Loading">
+                    </div>
+                    <div class="product2card">
+                        <h3>${item.title}</h3>
+                        <p>Price:  ${ "$ " + item.price}.00</p>
+                        <p>Product Description : <br><span>Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Tenetur voluptatibusminus veniam ea eligendi</span></p>
+                       <span>Qty : </span>
+                        <select data-id="${item._id}" id="quantityselect">
+                        <option value="">${item.quantity}</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                      <button  id="removebtn" data-id="${item._id}">Remove</button>
+                    </div>
+                </div>`
+    return card
+  }
+
+  function total(){
+    let total =0;
+    for(let i =0; i<userCart.length; i++){
+      total += +userCart[i].quantity * +userCart[i].price
+    }
+    let value = document.getElementById('totalvalue')
+    value.innerText =  "$ " +total
+    let discountedvalue = document.getElementById('discounttotal')
+    discountedvalue.innerText = "$ " + (total - total*0.15).toFixed(2)
+    localStorage.setItem('totalPayment', discountedvalue.innerText)
+  }
+  
+  getcart()
 
 </script>
 

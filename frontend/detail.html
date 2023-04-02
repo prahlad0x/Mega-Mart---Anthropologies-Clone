@@ -154,8 +154,10 @@
         }
 
         #home {
+            color: rgb(15, 150, 132);
             cursor: pointer;
         }
+
         #username {
             font-size: larger;
             margin: auto 30px;
@@ -209,8 +211,10 @@
         </div>
         <div class="product-details">
             <h2 class="product-name">Product Name</h2>
-            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatibus
-                minus veniam ea eligendi</p>
+            <p class="product-description"> Product Description : <br><span>Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Tenetur voluptatibusminus veniam ea eligendi</span>
+            </p>
+            <p class="product-price"></p>
             <div class="product-quantity">
                 <label for="quantity">Quantity:</label>
                 <select id="quantity">
@@ -241,12 +245,25 @@
         </div>
     </footer>
     <script>
-        const productImage = document.querySelector(".product-image img");
-        const productName = document.querySelector(".product-name");
-        const productDescription = document.querySelector(".product-description");
-        const quantitySelector = document.getElementById("quantity");
-        const colorSelector = document.getElementById("color");
-        const addToCartBtn = document.getElementById("add-to-cart");
+        const Productid = localStorage.getItem('detailProductId')
+        const userId = localStorage.getItem('userId')
+        let userCart = []
+        let User = {}
+        let Product = '';
+        const url = "https://clear-slug-stockings.cyclic.app/"
+
+        let anchors = document.querySelectorAll('.dresses')
+        let anchor3 = document.querySelector('.top-rated')
+        let anchor2 = document.querySelector('.shoes')
+        let home = document.getElementById('home')
+        let cartbtn = document.getElementById('cart')
+        let productImage = document.querySelector(".product-image img");
+        let productName = document.querySelector(".product-name");
+        let productPrice = document.querySelector(".product-price");
+        let productDescription = document.querySelector(".product-description");
+        let quantitySelector = document.getElementById("quantity");
+        let colorSelector = document.getElementById("color");
+        let addToCartBtn = document.getElementById("add-to-cart");
         let username = document.getElementById('username')
         username.textContent = (localStorage.getItem('username') == '') ? "Login/Register" : localStorage.getItem('username');
 
@@ -258,47 +275,86 @@
             }
         })
 
-        let product = {
-            name: "",
-            description: "",
-            quantity: 1,
-            color: "",
-        };
+        function getProduct() {
+            fetch(`${url}products/${Productid}`)
+                .then(res => res.json())
+                .then(res => {
+                    Product = res.product
+                    productImage.setAttribute('src', Product.image)
+                    productName.innerText = Product.title
+                    productPrice.innerText = "$ " + Product.price + ".00"
+                    quantitySelector.addEventListener('change', () => {
+                        Product.quantity = quantitySelector.value
+                    })
+                })
+                .catch(err => console.log(err))
 
-        quantitySelector.addEventListener("change", () => {
-            product.quantity = parseInt(quantitySelector.value);
-        });
 
-        colorSelector.addEventListener("change", () => {
-            product.color = colorSelector.value;
-        });
 
-        addToCartBtn.addEventListener("click", () => {
-            product.name = productName.textContent;
-            product.description = productDescription.textContent;
+            fetch(`${url}users/${userId}`)
+                .then(res => res.json())
+                .then(res => {
+                    User = res.user
+                    userCart = User.cart
+                    addToCartBtn.addEventListener("click", () => {
+                        if (username.textContent == "Login/Register") {
+                            location.href = 'logReg.html'
+                        }
+                        else{
+                            if (check(Product, userCart)) {
+                                userCart.push(Product)
+                                updateCart()
+                            } else alert('Product Already In Cart')
+                        }
+                    });
+                })
+                .catch(err => console.log(err))
+        }
 
-            localStorage.setItem("product", JSON.stringify(product));
-        });
 
-        let cartbtn = document.getElementById('cart')
+        function check(p, c) {
+            for (let i = 0; i < c.length; i++) {
+                if (p._id == c[i]._id) {
+                    return false
+                }
+            }
+            return true;
+        }
+        function updateCart() {
+            // console.log(userCart)
+            let obj = {
+                cart: userCart,
+            }
+            fetch(`${url}users/updatecart/${userId}`, {
+                method: "PATCH",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(obj)
+            }).then(res => res.json())
+                .then(res => {
+                    alert('Product add to cart')
+                }).catch(err => console.log(err))
+        }
+
+
         cartbtn.addEventListener('click', () => {
+            if (username.textContent !== "Login/Register") {
             location.href = 'cart.html'
+        } else {
+            location.href = 'logReg.html'
+        }
         })
 
-        let home = document.getElementById('home')
         home.addEventListener('click', () => {
             location.href = 'index.html'
         })
-        let anchors = document.querySelectorAll('.dresses')
-        let anchor2 = document.querySelector('.shoes')
         anchor2.addEventListener('click', () => {
             localStorage.setItem('searchvalue', 'shoes')
+            location.href = 'product.html'
         })
-        let anchor3 = document.querySelector('.top-rated')
         anchor3.addEventListener('click', () => {
             localStorage.setItem('searchvalue', 'top-rated')
+            location.href = 'product.html'
         })
-
 
         for (let btn of anchors) {
             btn.addEventListener('click', () => {
@@ -307,6 +363,9 @@
             })
         }
 
+        window.addEventListener('load', () => {
+            getProduct()
+        })
     </script>
 </body>
 
